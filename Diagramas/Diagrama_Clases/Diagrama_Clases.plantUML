@@ -26,6 +26,7 @@ class Factura {
   +double total
   +List<DetalleFactura> detalles
   +void agregarDetalle(DetalleFactura detalle)
+  +List<Pago> detalles
   +double calcularTotal()
 }
 
@@ -71,13 +72,6 @@ class Pago {
   +void procesarPago()
 }
 
-class Rol {
-  +int id
-  +String nombre
-  +List<String> permisos
-  +boolean tienePermiso(String permiso)
-}
-
 ' Relaciones entre clases
 Carrito "1" *-- "*" Producto : contiene >
 Factura "1" *-- "*" DetalleFactura : contiene >
@@ -85,9 +79,10 @@ Producto "1" *-- "*" DetalleFactura : aparece en >
 Usuario "1" *-- "*" Carrito : tiene >
 Usuario "1" <|-- "1" Administrador : es un >
 Usuario "1" <|-- "1" Cliente : es un >
-Usuario "1" *-- "1..*" Rol : tiene >
 Cliente "1" *-- "*" Pago : realiza >
 Administrador "1" *-- "*" Producto : gestiona >
 Cliente "1" -- "*" Producto : ve >
+Factura "1" *-- "*" Pago : contiene >
+
 
 @enduml
