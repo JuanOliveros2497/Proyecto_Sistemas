@@ -1,0 +1,28 @@
+@startuml Diagrama_Paquetes
+package "Sistema" {
+  package "Usuarios" {
+    class Administrador
+    class Cliente
+  }
+
+  package "Inventario" {
+    class Producto
+    class Categoria
+  }
+
+  package "Carrito de Compras" {
+    class Carrito
+    class DetalleCarrito
+  }
+
+  package "Factura" {
+    class Factura
+    class DetalleFactura
+  }
+
+  package "Pago" {
+    class Pago
+  }
+}
+
+@enduml

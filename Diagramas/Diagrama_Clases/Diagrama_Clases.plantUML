@@ -1,0 +1,93 @@
+@startuml Diagrama_Clases
+
+class Producto {
+  +int id
+  +String nombre
+  +String descripcion
+  +double precio
+  +int cantidadDisponible
+  +void actualizarStock(int cantidad)
+  +void cambiarPrecio(double nuevoPrecio)
+}
+
+class Carrito {
+  +int id
+  +List<Producto> productos
+  +double total
+  +void agregarProducto(Producto producto, int cantidad)
+  +void eliminarProducto(Producto producto)
+  +void actualizarCantidad(Producto producto, int cantidad)
+  +double calcularTotal()
+}
+
+class Factura {
+  +int id
+  +Date fecha
+  +double total
+  +List<DetalleFactura> detalles
+  +void agregarDetalle(DetalleFactura detalle)
+  +double calcularTotal()
+}
+
+class DetalleFactura {
+  +int id
+  +Producto producto
+  +int cantidad
+  +double total
+  +double calcularTotal()
+}
+
+class Usuario {
+  +int id
+  +String nombre
+  +String correo
+  +String direccion
+  +String contrasena
+  +boolean esActivo
+  +void registrarUsuario()
+  +boolean autenticar(String correo, String contrasena)
+  +void cambiarContrasena(String nuevaContrasena)
+  +void actualizarDatos(String nombre, String direccion)
+}
+
+class Administrador {
+  +void gestionarInventario()
+  +void verEstadisticas()
+}
+
+class Cliente {
+  +void agregarAlCarrito(Producto producto, int cantidad)
+  +void realizarCompra(Carrito carrito)
+  +void verCarrito()
+  +void verCatalogoProductos()
+}
+
+class Pago {
+  +int id
+  +double monto
+  +Date fecha
+  +String metodoPago
+  +boolean procesado
+  +void procesarPago()
+}
+
+class Rol {
+  +int id
+  +String nombre
+  +List<String> permisos
+  +boolean tienePermiso(String permiso)
+}
+
+' Relaciones entre clases
+Carrito "1" *-- "*" Producto : contiene >
+Factura "1" *-- "*" DetalleFactura : contiene >
+Producto "1" *-- "*" DetalleFactura : aparece en >
+Usuario "1" *-- "*" Carrito : tiene >
+Usuario "1" <|-- "1" Administrador : es un >
+Usuario "1" <|-- "1" Cliente : es un >
+Usuario "1" *-- "1..*" Rol : tiene >
+Cliente "1" *-- "*" Pago : realiza >
+Administrador "1" *-- "*" Producto : gestiona >
+Cliente "1" -- "*" Producto : ve >
+
+@enduml

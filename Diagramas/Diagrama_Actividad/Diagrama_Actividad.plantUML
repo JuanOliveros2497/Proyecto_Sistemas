@@ -1,0 +1,33 @@
+@startuml Diagrama_Actividades
+start
+
+:Iniciar Sesión o Registrar Usuario;
+if (¿Es Usuario Nuevo?) then (Sí)
+  :Registrar Usuario;
+  :Iniciar Sesión;
+else
+  :Iniciar Sesión;
+endif
+
+:Redirigir a Cliente o Administrador;
+
+fork
+  :Administrador: Gestionar Inventario;
+  :Administrador: Ver Estadísticas;
+  :Administrador: Salir;
+fork again
+  :Cliente: Ver Catálogo de Productos;
+  :Cliente: Seleccionar Producto;
+  :Cliente: Ver Detalle del Producto;
+  :Cliente: Agregar Producto al Carrito;
+  :Cliente: Actualizar Cantidad en el Carrito;
+  :Cliente: Eliminar Producto del Carrito;
+  :Cliente: Ver Carrito;
+  :Cliente: Realizar Compra;
+  :Cliente: Seleccionar Método de Pago;
+  :Cliente: Procesar Pago;
+end fork
+
+stop
+@enduml
+
